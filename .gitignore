@@ -1,7 +1,13 @@
+# jetbrains software (phpstorm, etc)
+.idea/*
+
+# ignore actual data files
 os/codepo_gb/*
 os/opname_csv_gb/*
+os/scratch/*
+
 fsa/xml/*
 
 
-.idea/*
+# allow .gitkeep files from previous ignores..
 !.gitkeep

@@ -7,7 +7,7 @@ curl_setopt_array($ch, [
 	CURLOPT_HEADER => false, 
 	CURLOPT_RETURNTRANSFER => true,
 	CURLOPT_FOLLOWLOCATION => true,
-	CURLOPT_USERAGENT => 'xml download'
+	CURLOPT_USERAGENT => 'Bulk XML Download (https://github.com/ylt/opendata_importers)'
 ]);
 $page  = curl_exec($ch);
 
@@ -22,3 +22,4 @@ foreach($matches as list($url, $filename)) {
 	curl_exec($ch);
 	fclose($fh);
 }
+curl_close($ch);

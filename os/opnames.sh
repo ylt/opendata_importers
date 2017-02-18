@@ -64,4 +64,26 @@ SQL
 	);
 done
 
+# LIKE on postcode column can be a little slow, plus it can be inaccurate for shorter postcodes...
+# i.e. SA6 also would match SA67 in a LIKE SA6%
+# so we build up an index to do lookups against
+SQL=$SQL$(cat <<SQL
+DROP TABLE IF EXISTS
+CREATE TABLE `postcode_district` (
+	`Postcode` VARCHAR(10) NOT NULL COLLATE 'utf8_unicode_ci',
+	`District` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	PRIMARY KEY (`Postcode`),
+	INDEX `District` (`District`)
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB
+;
+
+INSERT INTO postcode_district
+(postcode, district)
+SELECT postcode, trim(left(postcode, length(postcode)-3))
+FROM postcodes
+SQL
+    );
+
 echo $SQL;
