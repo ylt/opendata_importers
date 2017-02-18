@@ -1,0 +1,7 @@
+os/codepo_gb/*
+os/opname_csv_gb/*
+fsa/xml/*
+
+
+.idea/*
+!.gitkeep
